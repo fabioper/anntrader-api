@@ -1,4 +1,5 @@
 import { Injectable } from '@nestjs/common'
+import AddProductDto from '../../dtos/add-product.dto'
 
 const products = [
   { id: '1', name: 'Produto 1' },
@@ -9,11 +10,13 @@ const products = [
 
 @Injectable()
 export class ProductsService {
-  getAll() {
+  async getAll() {
     return products
   }
 
-  getById(productId: string) {
+  async getById(productId: string) {
     return products.find((product) => product.id === productId)
   }
+
+  async create(dto: AddProductDto) {}
 }
