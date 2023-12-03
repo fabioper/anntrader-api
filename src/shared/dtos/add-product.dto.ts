@@ -2,7 +2,7 @@ import { ApiProperty } from '@nestjs/swagger'
 
 export default class AddProductDto {
   @ApiProperty()
-  title: string
+  name: string
 
   @ApiProperty({ nullable: true })
   image: string

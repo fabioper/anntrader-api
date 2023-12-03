@@ -6,8 +6,8 @@ import {
   Param,
   Post,
 } from '@nestjs/common'
-import { ProductsService } from './products.service'
-import AddProductDto from '../dtos/add-product.dto'
+import { ProductsService } from '../../application/services/products.service'
+import AddProductDto from '../../shared/dtos/add-product.dto'
 
 @Controller('products')
 export class ProductsController {

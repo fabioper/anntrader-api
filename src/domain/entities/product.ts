@@ -4,4 +4,8 @@ export default class Product {
   name: string
   description: string
   price: number
+
+  constructor(props: Product) {
+    Object.assign(this, props)
+  }
 }
