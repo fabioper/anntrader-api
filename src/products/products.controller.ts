@@ -7,7 +7,7 @@ import {
   Post,
 } from '@nestjs/common'
 import { ProductsService } from './products.service'
-import AddProductDto from '../../dtos/add-product.dto'
+import AddProductDto from '../dtos/add-product.dto'
 
 @Controller('products')
 export class ProductsController {
