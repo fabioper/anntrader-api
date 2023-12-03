@@ -1,11 +1,4 @@
-import {
-  Body,
-  Controller,
-  Get,
-  NotFoundException,
-  Param,
-  Post,
-} from '@nestjs/common'
+import { Body, Controller, Delete, Get, Param, Post } from '@nestjs/common'
 import { ProductsService } from '../../application/services/products.service'
 import AddProductDto from '../../shared/dtos/add-product.dto'
 
@@ -20,15 +13,16 @@ export class ProductsController {
 
   @Get(':id')
   async getProductDetails(@Param('id') productId: string) {
-    const productFound = await this.productsService.getById(productId)
-    if (!productFound) {
-      throw new NotFoundException()
-    }
-    return productFound
+    return await this.productsService.getById(productId)
   }
 
   @Post()
   async addProduct(@Body() dto: AddProductDto) {
     await this.productsService.create(dto)
+  }
+
+  @Delete(':id')
+  async deleteProduct(@Param('id') productId: string) {
+    await this.productsService.remove(productId)
   }
 }
