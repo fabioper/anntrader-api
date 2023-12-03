@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common'
-import AddProductDto from '../../shared/dtos/add-product.dto'
-import Product from '../../domain/entities/product'
-import { ProductsRepository } from '../../infraestructure/repositories/products.repository'
+import { ProductsRepository } from '@/src/infrastructure/repositories/products.repository'
+import Product from '@/src/domain/entities/product'
+import AddProductDto from '@/src/shared/dtos/add-product.dto'
 
 @Injectable()
 export class ProductsService {
@@ -17,7 +17,6 @@ export class ProductsService {
 
   async create(dto: AddProductDto) {
     const newProduct = new Product({
-      id: 'hello',
       image: dto.image,
       price: dto.price,
       description: dto.description,
