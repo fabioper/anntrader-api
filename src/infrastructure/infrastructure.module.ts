@@ -20,7 +20,7 @@ import { ConfigService } from '@nestjs/config'
           database: config.getOrThrow<string>('DB_DATABASE'),
           synchronize: true,
           entities: [Product],
-          logging: true,
+          logging: process.env.NODE_ENV === 'development',
         }
       },
     }),

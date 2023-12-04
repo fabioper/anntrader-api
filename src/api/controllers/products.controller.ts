@@ -1,14 +1,25 @@
-import { Body, Controller, Delete, Get, Param, Post } from '@nestjs/common'
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Post,
+  Put,
+  Query,
+} from '@nestjs/common'
 import { ProductsService } from '../../application/services/products.service'
 import AddProductDto from '../../shared/dtos/add-product.dto'
+import UpdateProductDto from '@/src/shared/dtos/update-product.dto'
+import { ListProductsQuery } from '@/src/shared/dtos/list-products-query'
 
 @Controller('products')
 export class ProductsController {
   constructor(private productsService: ProductsService) {}
 
   @Get()
-  async listProducts() {
-    return await this.productsService.getAll()
+  async listProducts(@Query() query?: ListProductsQuery) {
+    return await this.productsService.getAll(query.search)
   }
 
   @Get(':id')
@@ -19,6 +30,14 @@ export class ProductsController {
   @Post()
   async addProduct(@Body() dto: AddProductDto) {
     await this.productsService.create(dto)
+  }
+
+  @Put(':id')
+  async updateProduct(
+    @Param('id') productId: string,
+    @Body() dto: UpdateProductDto,
+  ) {
+    await this.productsService.update(productId, dto)
   }
 
   @Delete(':id')

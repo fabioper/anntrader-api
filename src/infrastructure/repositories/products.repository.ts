@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common'
 import { InjectRepository } from '@nestjs/typeorm'
-import { Repository } from 'typeorm'
+import { FindOptionsWhere, ILike, Repository } from 'typeorm'
 import EntityRepository from '@/src/shared/entity-repository'
 import Product from '@/src/domain/entities/product'
 
@@ -11,8 +11,15 @@ export class ProductsRepository implements EntityRepository<Product> {
     private readonly repository: Repository<Product>,
   ) {}
 
-  async getAll(): Promise<Product[]> {
-    return await this.repository.find()
+  async getAll(query?: string): Promise<Product[]> {
+    const filterOptions: FindOptionsWhere<Product>[] = [
+      { name: ILike(`%${query}%`) },
+      { description: ILike(`%${query}%`) },
+    ]
+
+    return await this.repository.find({
+      where: query && filterOptions,
+    })
   }
 
   async create(product: Product): Promise<void> {
@@ -27,7 +34,7 @@ export class ProductsRepository implements EntityRepository<Product> {
     await this.repository.delete(productId)
   }
 
-  async update(product: Product): Promise<void> {
-    await this.repository.update(product.id, product)
+  async update(productId: string, product: Product): Promise<void> {
+    await this.repository.update(productId, product)
   }
 }
