@@ -1,8 +1,8 @@
 import { Injectable } from '@nestjs/common'
 import { InjectRepository } from '@nestjs/typeorm'
 import { FindOptionsWhere, ILike, Repository } from 'typeorm'
-import EntityRepository from '@/src/shared/entity-repository'
 import Product from '@/src/domain/entities/product'
+import EntityRepository from '@/src/shared/base/entity-repository'
 
 @Injectable()
 export class ProductsRepository implements EntityRepository<Product> {
