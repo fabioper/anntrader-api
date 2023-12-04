@@ -26,7 +26,7 @@ import { ConfigService } from '@nestjs/config'
     }),
     TypeOrmModule.forFeature([Product]),
   ],
-  providers: [ProductsRepository, ConfigService],
+  providers: [ProductsRepository],
   exports: [ProductsRepository],
 })
 export class InfrastructureModule {}
