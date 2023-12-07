@@ -21,7 +21,9 @@ import { ConfigService } from '@nestjs/config'
           synchronize: true,
           entities: [Product],
           logging: process.env.NODE_ENV === 'development',
-          ssl: false,
+          ssl: {
+            rejectUnauthorized: false,
+          },
         }
       },
     }),
